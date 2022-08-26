@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview/Utils/Routes/RoutesName.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class MessageList extends StatefulWidget {
   const MessageList({Key? key}) : super(key: key);

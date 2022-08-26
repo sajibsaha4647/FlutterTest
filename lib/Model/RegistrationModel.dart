@@ -1,8 +1,5 @@
 class RegistrationModel {
-  String? context;
   String? id;
-  String? type;
-  String? secondid;
   String? address;
   int? quota;
   int? used;
@@ -12,10 +9,7 @@ class RegistrationModel {
   String? updatedAt;
 
   RegistrationModel(
-      {this.context,
-        this.id,
-        this.type,
-        this.secondid,
+      {this.id,
         this.address,
         this.quota,
         this.used,
@@ -25,10 +19,7 @@ class RegistrationModel {
         this.updatedAt});
 
   RegistrationModel.fromJson(Map<String, dynamic> json) {
-    context = json['@context'];
-    id = json['@id'];
-    type = json['@type'];
-    secondid = json['id'];
+    id = json['id'];
     address = json['address'];
     quota = json['quota'];
     used = json['used'];
@@ -40,10 +31,7 @@ class RegistrationModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['@context'] = this.context;
-    data['@id'] = this.id;
-    data['@type'] = this.type;
-    data['id'] = this.secondid;
+    data['id'] = this.id;
     data['address'] = this.address;
     data['quota'] = this.quota;
     data['used'] = this.used;
