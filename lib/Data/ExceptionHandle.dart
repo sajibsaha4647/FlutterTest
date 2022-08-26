@@ -14,17 +14,17 @@ class AppException implements Exception {
 //handle all exception here
 
 class FetchDataException extends AppException{
-  FetchDataException([String? _message ]) : super(_message,"Error on api communication") ;
+  FetchDataException([String? _message ]) : super("Error on api communication") ;
 }
 
 class BadRequestExceptoin extends AppException{
-  BadRequestExceptoin([String? _message]) : super(_message, "Error on bad request") ;
+  BadRequestExceptoin([String? _message]) : super("Error on bad request") ;
 }
 
 class UnauthorisedExceptoin extends AppException{
-  UnauthorisedExceptoin([ String? _message ]) : super(_message, "Error on unauthorised");
+  UnauthorisedExceptoin([ String? _message ]) : super("Error on unauthorised");
 }
 
 class InvalidException extends AppException{
-  InvalidException([String? _message]) : super(_message,"Invalid exception") ;
+  InvalidException([String? _message]) : super("Invalid exception") ;
 }

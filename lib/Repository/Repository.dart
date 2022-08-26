@@ -10,18 +10,20 @@ class Repository {
   BaseApiservices baseApiServices = NetworkApiServiece();
 
   //domain api
-  Future<DomainsModel>getDomainApi(data,context,header)async{
-    print(data);
+  Future<DomainsModel>getDomainApi(header)async{
+
     try{
       dynamic response = await baseApiServices.getGetApiResponse('${AppUrls.DomainApi}',header);
-      return response  = DomainsModel.fromJson(response);
+      // print("repository.toString() ********************");
+      // print(response.toString());
+      return response  = DomainsModel.fromJson(response[0]);
     }catch(e){
       throw e;
     }
   }
 
   //Account api
-  Future<DomainsModel>getAccountApi(data,context)async{
+  Future<DomainsModel>getAccountApi(data)async{
     print(data);
     try{
       dynamic response = await baseApiServices.getPostApiResponse('${AppUrls.AccountApi}',data);
@@ -32,7 +34,7 @@ class Repository {
   }
 
   //Token api
-  Future<DomainsModel>getTokenApi(data,context)async{
+  Future<DomainsModel>getTokenApi(data)async{
     print(data);
     try{
       dynamic response = await baseApiServices.getPostApiResponse('${AppUrls.TokenApi}',data);
@@ -43,7 +45,7 @@ class Repository {
   }
 
   //Token api
-  Future<DomainsModel>getMessagesApi(data,context,header)async{
+  Future<DomainsModel>getMessagesApi(data,header)async{
     print(data);
     try{
       dynamic response = await baseApiServices.getGetApiResponse('${AppUrls.MessagesApi}',header);

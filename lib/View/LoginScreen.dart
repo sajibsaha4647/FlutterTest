@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_interview/Utils/Routes/RoutesName.dart';
+import 'package:flutter_interview/ViewModel/DomainViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:get/get.dart';
 import '../Resource/Components/RoundButton.dart';
 import '../Utils/Routes/Routes.dart';
 
@@ -18,8 +19,19 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
 
+  final DomainViewModel domainViewModel = Get.put(DomainViewModel());
+
+
+  @override
+  void initState() {
+    print(domainViewModel.responseData);
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: Scaffold(
       body: Center(

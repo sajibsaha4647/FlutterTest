@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_interview/ViewModel/DomainViewModel.dart';
+import 'package:flutter_interview/ViewModel/ViewModelBinding.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'Utils/Routes/Routes.dart';
 import 'Utils/Routes/RoutesName.dart';
@@ -20,7 +25,8 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
-        return  MaterialApp(
+        return  GetMaterialApp(
+          initialBinding:ViewModelBinding(),
           debugShowCheckedModeBanner: false,
           onGenerateRoute: Routes.generateRoute ,
           initialRoute: RoutesName.splashscreen,

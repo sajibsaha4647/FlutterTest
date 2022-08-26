@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_interview/Utils/Routes/RoutesName.dart';
 import 'package:flutter_interview/View/LoginScreen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:get/get.dart';
 import '../Utils/Routes/Routes.dart';
+import '../ViewModel/DomainViewModel.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -19,18 +21,18 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _controller;
   late Animation<TextStyle> _animation;
 
+  final DomainViewModel domainViewModel = Get.put(DomainViewModel());
+
+
+
+
   @override
   void initState() {
     super.initState();
 
     Timer(const Duration(seconds: 4), () {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
-            (route) => false,
-      );
+      Get.offNamed(RoutesName.login);
     });
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(
@@ -55,6 +57,8 @@ class _SplashScreenState extends State<SplashScreen>
     });
     _controller.forward();
   }
+
+
 
   @override
   void dispose() {
