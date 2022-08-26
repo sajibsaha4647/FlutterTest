@@ -12,7 +12,6 @@ class DomainViewModel extends GetConnect{
 
 
   var responseData = ApiResponse.loading();
-
    setResponse(ApiResponse<DomainsModel> response) {
     responseData = response ;
   }

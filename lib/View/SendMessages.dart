@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_interview/ViewModel/MessagesViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class SendMessages extends StatefulWidget {
   const SendMessages({Key? key}) : super(key: key);
@@ -14,6 +17,8 @@ class _SendMessagesState extends State<SendMessages> {
   TextEditingController _toController = TextEditingController();
   TextEditingController _subjectController = TextEditingController();
   TextEditingController _bodyController = TextEditingController();
+
+  final  sendmessageViewModel = Get.find<MessagesViewModel>();
 
   @override
   Widget build(BuildContext context) {

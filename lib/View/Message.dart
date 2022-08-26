@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview/Utils/Routes/RoutesName.dart';
+import 'package:flutter_interview/ViewModel/MessagesViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class MessageList extends StatefulWidget {
   const MessageList({Key? key}) : super(key: key);
@@ -9,9 +12,9 @@ class MessageList extends StatefulWidget {
   State<MessageList> createState() => _MessageListState();
 }
 
-
-
 class _MessageListState extends State<MessageList> {
+
+  final  messageViewModel = Get.find<MessagesViewModel>();
 
 
   @override

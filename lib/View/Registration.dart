@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_interview/ViewModel/RegistrationViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../Resource/Components/RoundButton.dart';
 import '../Utils/Routes/RoutesName.dart';
@@ -17,6 +20,8 @@ class _RegistrationState extends State<Registration> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
+
+  final  registrationViewModel = Get.find<RegistrationViewModel>();
 
   @override
   Widget build(BuildContext context) {

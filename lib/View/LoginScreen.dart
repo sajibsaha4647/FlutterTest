@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_interview/Utils/Routes/RoutesName.dart';
 import 'package:flutter_interview/ViewModel/DomainViewModel.dart';
+import 'package:flutter_interview/ViewModel/LoginViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../Resource/Components/RoundButton.dart';
@@ -20,11 +21,12 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
 
   final  domainViewModel = Get.find<DomainViewModel>();
+  final  loginViewModel = Get.find<LoginViewModel>();
 
 
   @override
   void initState() {
-    print('domainViewModel.responseData.data');
+    // print('domainViewModel.responseData.data');
     print(domainViewModel.responseData.data.domain);
     super.initState();
   }
@@ -32,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
         child: Scaffold(
       body: Center(
