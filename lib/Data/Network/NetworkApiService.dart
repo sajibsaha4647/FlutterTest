@@ -15,6 +15,8 @@ class NetworkApiServiece extends BaseApiservices {
   //here i get Get response
   @override
   Future getGetApiResponse(String url, header) async {
+    print("++++++++in deep+++++++++");
+    print(header);
     dynamic responseJson;
     try {
       final response = await http.get(
@@ -24,6 +26,9 @@ class NetworkApiServiece extends BaseApiservices {
           "Authorization": "Bearer ${header}"
         },
       ).timeout(const Duration(seconds: 10));
+      print(response.statusCode);
+      print(response.body);
+      print("++++++++in deep+++++++++");
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
@@ -48,8 +53,7 @@ class NetworkApiServiece extends BaseApiservices {
               body: data,
               )
           .timeout(const Duration(seconds: 10));
-      print(response.statusCode);
-      print(response.body);
+
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException("$connectionNetwork !");

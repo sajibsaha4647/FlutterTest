@@ -1,5 +1,6 @@
 
 import 'package:flutter_interview/Model/DomainsModel.dart';
+import 'package:flutter_interview/Model/LoginModel.dart';
 import 'package:flutter_interview/Model/RegistrationModel.dart';
 
 import '../Data/Network/BaseApiService.dart';
@@ -37,22 +38,25 @@ class Repository {
   }
 
   //Token api
-  Future<DomainsModel>getTokenApi(data)async{
+  Future<LoginModel>getTokenApi(data)async{
     print(data);
     try{
       dynamic response = await baseApiServices.getPostApiResponse('${AppUrls.TokenApi}',data);
-      return response  = DomainsModel.fromJson(response);
+      return response  = LoginModel.fromJson(response);
     }catch(e){
       throw e;
     }
   }
 
-  //Token api
-  Future<DomainsModel>getMessagesApi(data,header)async{
-    print(data);
+  //messages api
+  Future getMessagesApi(header)async{
     try{
       dynamic response = await baseApiServices.getGetApiResponse('${AppUrls.MessagesApi}',header);
-      return response  = DomainsModel.fromJson(response);
+      print("response");
+      print(response);
+     return response ;
+
+
     }catch(e){
       throw e;
     }

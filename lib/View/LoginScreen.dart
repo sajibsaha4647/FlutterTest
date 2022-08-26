@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_interview/Utils/Routes/RoutesName.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../Resource/Components/RoundButton.dart';
 import '../Utils/Routes/Routes.dart';
+import '../Utils/Utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,12 +19,27 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _usernameController = TextEditingController();
+
   TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
 
   final  domainViewModel = Get.find<DomainViewModel>();
   final  loginViewModel = Get.find<LoginViewModel>();
+
+  _getSignin()async{
+
+    if(loginViewModel.usernameController.text == null ||  loginViewModel.usernameController.text == '' || _passwordController.text == null ||  _passwordController.text == ''){
+      Utils.Toasts("All field are required");
+    }else{
+      Map data ={
+        "address": "${loginViewModel.usernameController.text}@${domainViewModel.responseData.data.domain}",
+        "password": _passwordController.text
+      };
+      print(jsonEncode(data));
+      loginViewModel.getTokenApi(jsonEncode(data));
+    }
+
+  }
 
 
   @override
@@ -72,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextField(
                       onTap: () {},
                       textAlign: TextAlign.start,
-                      controller: _usernameController,
+                      controller: loginViewModel.usernameController,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -147,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
               customButton(
                 "Sign In",
                 () {
-                  Navigator.pushReplacementNamed(context, RoutesName.home);
+                  _getSignin();
                 },
               ),
               SizedBox(

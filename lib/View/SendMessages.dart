@@ -1,9 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:flutter_interview/Utils/Utils.dart';
 import 'package:flutter_interview/ViewModel/MessagesViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
+import '../ViewModel/DomainViewModel.dart';
+import '../ViewModel/LoginViewModel.dart';
 
 class SendMessages extends StatefulWidget {
   const SendMessages({Key? key}) : super(key: key);
@@ -14,11 +19,61 @@ class SendMessages extends StatefulWidget {
 
 class _SendMessagesState extends State<SendMessages> {
 
+  final  loginViewModel = Get.find<LoginViewModel>();
+  final  domainViewModel = Get.find<DomainViewModel>();
+
   TextEditingController _toController = TextEditingController();
   TextEditingController _subjectController = TextEditingController();
   TextEditingController _bodyController = TextEditingController();
+  List<String> attachments = [];
+  bool isHTML = false;
 
   final  sendmessageViewModel = Get.find<MessagesViewModel>();
+
+  @override
+  void initState() {
+    setState(() {
+      _toController.text = '${loginViewModel.usernameController.text}@${domainViewModel.responseData.data.domain}';
+    });
+    super.initState();
+  }
+
+  Future<void> send() async {
+
+    if(_bodyController.text == '' || _subjectController.text == '' || _toController.text == ''){
+      Utils.Toasts("All field are required");
+    }else{
+      final Email email = Email(
+        body: _bodyController.text,
+        subject: _subjectController.text,
+        recipients: [_toController.text],
+        cc: ['example_cc@ex.com'],
+        bcc: ['example_bcc@ex.com'],
+        attachmentPaths: attachments,
+        isHTML: isHTML,
+      );
+
+      String platformResponse;
+
+      try {
+        await FlutterEmailSender.send(email);
+        platformResponse = 'success';
+      } catch (error) {
+        print(error);
+        platformResponse = error.toString();
+      }
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(platformResponse),
+        ),
+      );
+    }
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +96,7 @@ class _SendMessagesState extends State<SendMessages> {
                     ),
                     child: TextField(
                       onTap: () {},
+                      enabled: false,
                       textAlign: TextAlign.start,
                       controller: _toController,
                       keyboardType: TextInputType.text,
@@ -110,15 +166,20 @@ class _SendMessagesState extends State<SendMessages> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.r),
                 ),
-                child: Container(
-                  height: 50.h,
-                  width: 100.w,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.purple,
-                      borderRadius: BorderRadius.circular(20.r)
+                child: InkWell(
+                  onTap: (){
+                    send();
+                  },
+                  child: Container(
+                    height: 50.h,
+                    width: 100.w,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.purple,
+                        borderRadius: BorderRadius.circular(20.r)
+                    ),
+                    child: Text("Send",style: TextStyle(color: Colors.white),),
                   ),
-                  child: Text("Send",style: TextStyle(color: Colors.white),),
                 ),
               ),
 

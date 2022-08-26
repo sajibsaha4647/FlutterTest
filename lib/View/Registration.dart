@@ -29,7 +29,7 @@ class _RegistrationState extends State<Registration> {
   final  registrationViewModel = Get.find<RegistrationViewModel>();
   final  domainViewModel = Get.find<DomainViewModel>();
 
-  _getSignin(context)async{
+  _getSignup(context)async{
 
     if(_usernameController.text == null ||  _usernameController.text == '' || _passwordController.text == null ||  _passwordController.text == ''){
       Utils.Toasts("All field are required");
@@ -38,7 +38,7 @@ class _RegistrationState extends State<Registration> {
         "address": "${_usernameController.text}@${domainViewModel.responseData.data.domain}",
         "password": _passwordController.text
       };
-      print(jsonEncode(data));
+      // print(jsonEncode(data));
       registrationViewModel.getAccountApi(jsonEncode(data));
     }
 
@@ -159,7 +159,7 @@ class _RegistrationState extends State<Registration> {
                   customButton(
                     "Sign Up",
                         () {
-                      _getSignin(context);
+                          _getSignup(context);
                     },
                   ),
                   SizedBox(
