@@ -19,12 +19,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
 
-  final DomainViewModel domainViewModel = Get.put(DomainViewModel());
+  final  domainViewModel = Get.find<DomainViewModel>();
 
 
   @override
   void initState() {
-    print(domainViewModel.responseData);
+    print('domainViewModel.responseData.data');
+    print(domainViewModel.responseData.data.domain);
     super.initState();
   }
 

@@ -1,21 +1,21 @@
 
 
+import 'package:flutter_interview/Model/DomainsModel.dart';
 import 'package:flutter_interview/Repository/Repository.dart';
 import 'package:get/get.dart';
 
 import '../Response/ApiResponse.dart';
 
-class DomainViewModel extends GetxController{
+class DomainViewModel extends GetConnect{
 
   final _repository = Repository();
 
 
-  List<dynamic> _responseData = [].obs ;
-  get responseData =>_responseData;
+  var responseData = ApiResponse.loading();
 
-  // setResponse( response) {
-  //   responseData.value = response;
-  // }
+   setResponse(ApiResponse<DomainsModel> response) {
+    responseData = response ;
+  }
 
   @override
   void onInit() {
@@ -25,11 +25,13 @@ class DomainViewModel extends GetxController{
 
   Future<void> getDomainApi(data) async {
     _repository.getDomainApi(data).then((value) {
-      // print(value.toJson());
-      // _responseData.value = value ;
+      print("success");
+      // print(value.to);
+      setResponse(ApiResponse.completed(value));
     }).onError((error, stackTrace) {
-      print("error");
+      print("failed");
       print(error);
+      setResponse(ApiResponse.error(error.toString()));
     });
 
     // Navigator.popAndPushNamed(context, Routes.homeScreen);
