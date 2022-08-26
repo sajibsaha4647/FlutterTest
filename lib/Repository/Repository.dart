@@ -1,5 +1,6 @@
 
 import 'package:flutter_interview/Model/DomainsModel.dart';
+import 'package:flutter_interview/Model/RegistrationModel.dart';
 
 import '../Data/Network/BaseApiService.dart';
 import '../Data/Network/NetworkApiService.dart';
@@ -14,8 +15,8 @@ class Repository {
 
     try{
       dynamic response = await baseApiServices.getGetApiResponse('${AppUrls.DomainApi}',header);
-      // print("repository.toString() ********************");
-      // print(response.toString());
+      print("repository.toString() ********************");
+      print(response.toString());
       return response  = DomainsModel.fromJson(response[0]);
     }catch(e){
       throw e;
@@ -23,11 +24,13 @@ class Repository {
   }
 
   //Account api
-  Future<DomainsModel>getAccountApi(data)async{
+  Future<RegistrationModel>getAccountApi(data)async{
     print(data);
     try{
       dynamic response = await baseApiServices.getPostApiResponse('${AppUrls.AccountApi}',data);
-      return response  = DomainsModel.fromJson(response);
+      print("response here check");
+      print(response);
+      return response  = RegistrationModel.fromJson(response);
     }catch(e){
       throw e;
     }

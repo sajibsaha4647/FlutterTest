@@ -11,9 +11,13 @@ class ViewModelBinding extends Bindings{
   @override
   void dependencies() {
     Get.put<DomainViewModel>(DomainViewModel());
+
     Get.put<LoginViewModel>(LoginViewModel());
+
     Get.put<MessagesViewModel>(MessagesViewModel());
+
     Get.put<RegistrationViewModel>(RegistrationViewModel());
+
     Get.put<SharePrefViewModel>(SharePrefViewModel());
   }
 

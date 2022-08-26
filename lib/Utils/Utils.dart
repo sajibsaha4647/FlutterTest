@@ -8,9 +8,9 @@ class Utils {
   static Toasts(String msg) {
     Fluttertoast.showToast(
         msg: msg,
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Colors.grey,
         toastLength: Toast.LENGTH_LONG,
-        textColor: Colors.white);
+        textColor: Colors.black);
   }
 
 //adding flash bar here

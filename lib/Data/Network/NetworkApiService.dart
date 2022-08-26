@@ -35,13 +35,21 @@ class NetworkApiServiece extends BaseApiservices {
   //here i get post response
   @override
   Future getPostApiResponse(String url, dynamic data) async {
+    print("url : ++++++" + url);
+    print("data+++++++++++" + data);
     dynamic responseJson;
+    final encoding = Encoding.getByName('utf-8');
     try {
-      Response response = await post(
-        Uri.parse(url),
-        headers: {"Accept": "application/json"},
-        body: convert.JsonEncoder(data),
-      ).timeout(const Duration(seconds: 10));
+      Response response = await post(Uri.parse(url),
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+              },
+              body: data,
+              )
+          .timeout(const Duration(seconds: 10));
+      print(response.statusCode);
+      print(response.body);
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException("$connectionNetwork !");
@@ -51,8 +59,12 @@ class NetworkApiServiece extends BaseApiservices {
   }
 
   dynamic returnResponse(http.Response response) {
+
     switch (response.statusCode) {
       case 200:
+        dynamic responsJson = convert.jsonDecode(response.body);
+        return responsJson;
+      case 201:
         dynamic responsJson = convert.jsonDecode(response.body);
         return responsJson;
       case 400:

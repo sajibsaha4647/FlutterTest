@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_interview/Utils/Utils.dart';
+import 'package:flutter_interview/ViewModel/DomainViewModel.dart';
+import 'package:flutter_interview/ViewModel/LoginViewModel.dart';
 import 'package:flutter_interview/ViewModel/RegistrationViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,6 +27,22 @@ class _RegistrationState extends State<Registration> {
   bool _obscureText = true;
 
   final  registrationViewModel = Get.find<RegistrationViewModel>();
+  final  domainViewModel = Get.find<DomainViewModel>();
+
+  _getSignin(context)async{
+
+    if(_usernameController.text == null ||  _usernameController.text == '' || _passwordController.text == null ||  _passwordController.text == ''){
+      Utils.Toasts("All field are required");
+    }else{
+      Map data ={
+        "address": "${_usernameController.text}@${domainViewModel.responseData.data.domain}",
+        "password": _passwordController.text
+      };
+      print(jsonEncode(data));
+      registrationViewModel.getAccountApi(jsonEncode(data));
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +88,7 @@ class _RegistrationState extends State<Registration> {
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "Enter username",
+                                hintText: "Enter username(Example: sajib)",
                                 alignLabelWithHint: true,
                                 hintStyle: TextStyle(
                                   fontSize: 14.sp,
@@ -138,7 +159,7 @@ class _RegistrationState extends State<Registration> {
                   customButton(
                     "Sign Up",
                         () {
-                      // _getSignin();
+                      _getSignin(context);
                     },
                   ),
                   SizedBox(
