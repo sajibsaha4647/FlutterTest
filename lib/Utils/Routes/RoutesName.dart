@@ -8,4 +8,6 @@ class RoutesName {
 
   static const String signup = "signup_Screen" ;
 
+  static const String sendmessage = "send_message" ;
+
 }

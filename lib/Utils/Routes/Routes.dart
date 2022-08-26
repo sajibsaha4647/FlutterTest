@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview/View/LoginScreen.dart';
-import 'package:flutter_interview/View/MessageList.dart';
+import 'package:flutter_interview/View/Message.dart';
 import 'package:flutter_interview/View/Registration.dart';
 import 'package:flutter_interview/View/SplashScreen.dart';
 
+import '../../View/SendMessages.dart';
 import 'RoutesName.dart';
 
 
@@ -22,6 +23,9 @@ class Routes {
       case RoutesName.signup:
         return MaterialPageRoute(
             builder: (BuildContext context) => const Registration());
+      case RoutesName.sendmessage:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const SendMessages());
       default:
         return MaterialPageRoute(builder: (_) {
           return const SafeArea(
